@@ -1,0 +1,67 @@
+server:
+  port: 8044
+spring:
+  application:
+    name: userAdmin
+
+  datasource:
+    druid:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://localhost:3306/test_user?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&useSSL=false&allowPublicKeyRetrieval=true
+      username: root
+      password: 123456
+  redis:
+    database: 1
+    host: localhost
+    port: 6379
+    timeout: 1000  # 连接超时时长（毫秒）
+    jedis:
+      pool:
+        max-active: 1000  # 连接池最大连接数（使用负值表示没有限制）
+        max-wait: 5000      # 连接池最大阻塞等待时间（使用负值表示没有限制）
+        max-idle: 10      # 连接池中的最大空闲连接
+        min-idle: 5       # 连接池中的最小空闲连接yarn 
+# Mybatis-plus
+mybatis-plus:
+  mapper-locations: classpath*:mapper/*.xml
+  type-aliases-package: com.xjaxl.demo.entity.*
+  type-handlers-package: com.xjaxl.demo.config.mybatisTypeHandler
+  global-config:
+    db-config:
+      table-underline: true
+      #id类型
+      id-type: INPUT
+      #是否开启大写命名，默认不开启
+      #capital-mode: false
+      #logic-delete-field: delFlag # 全局逻辑删除的实体字段名(since 3.3.0,配置后可以忽略不配置步骤2)
+      logic-delete-value: 1 # 逻辑已删除值(默认为 1)
+      logic-not-delete-value: 0 # 逻辑未删除值(默认为 0)
+  configuration:
+    # 是否开启自动驼峰命名规则（camel case）映射，即从经典数据库列名 A_COLUMN（下划线命名） 到经典 Java 属性名 aColumn（驼峰命名） 的类似映射
+    map-underscore-to-camel-case: true
+    # 全局地开启或关闭配置文件中的所有映射器已经配置的任何缓存，默认为 true
+    cache-enabled: false
+    #懒加载
+    #aggressive-lazy-loading: true
+    #NONE：不启用自动映射 PARTIAL：只对非嵌套的 resultMap 进行自动映射 FULL：对所有的 resultMap 都进行自动映射
+    #auto-mapping-behavior: partial
+    #NONE：不做任何处理 (默认值)WARNING：以日志的形式打印相关警告信息 FAILING：当作映射失败处理，并抛出异常和详细信息
+    #auto-mapping-unknown-column-behavior: none
+    #如果查询结果中包含空值的列，则 MyBatis 在映射的时候，不会映射这个字段
+    call-setters-on-nulls: true
+    # 这个配置会将执行的sql打印出来，在开发或测试的时候可以用
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+electric:
+  global:
+    id: 1 #服务器app编号，用于主键中的host编号。为防止主键冲突，多台app部署，需设置不同的编号
+    peffix: 320000 #江苏
+    cache:
+      # 初始化加载热数据到redis缓存中（建议生产环境开启）
+      load-cache-data-enabled: false
+      load-page-limit-default: 10
+
+# 日志
+logging:
+  file:
+    path: D:/logs/hm-dianping
