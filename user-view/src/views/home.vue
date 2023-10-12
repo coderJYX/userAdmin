@@ -25,11 +25,6 @@
                   </el-option>
                 </el-select>
         <el-button
-            v-show="check"
-            @click="handleAdd()"
-            round>新增
-        </el-button>
-        <el-button
             type="primary"
             @click="getList"
             round>搜索
@@ -37,6 +32,13 @@
         <el-button
             @click="resetForm"
             round>重置
+        </el-button>
+      </div>
+      <div class="add-button">
+        <el-button
+            v-show="check"
+            @click="handleAdd()"
+            round>新增
         </el-button>
       </div>
       <div class="list">

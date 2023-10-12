@@ -70,6 +70,8 @@ public class UserController {
 
     @GetMapping("/deleteById")
     public ResultWrapper<Boolean> deleteById(String id) {
+        //校验是否是管理员
+        SystemUtils.checkPermissions();
         return ResultWrapper.success(userService.deleteById(id));
     }
 
