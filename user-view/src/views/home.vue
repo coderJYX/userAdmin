@@ -1,14 +1,14 @@
 <template>
   <div class="box">
     <div class="box-top">
-      <span>用户列表</span>
-      <span>当前用户：{{ localRealName }}</span>
-      <el-button type="primary" @click="loginOut()" round>退出登录</el-button>
+      <span class="left-span">用户列表</span>
+      <el-button class="right-button" type="primary" @click="loginOut()" round>退出登录</el-button>
+      <span class="right-span"> 当前用户：{{ localRealName }}</span>
     </div>
     <div class="box-body">
       <div class="select">
         <div class="demo-input-suffix">
-          用户名称：
+          <span>用户名称：</span>
           <el-input
               placeholder="请输入内容"
               prefix-icon="el-icon-search"
@@ -25,11 +25,13 @@
                   </el-option>
                 </el-select>
         <el-button
+            class="select-button"
             type="primary"
             @click="getList"
             round>搜索
         </el-button>
         <el-button
+            class="select-reset"
             @click="resetForm"
             round>重置
         </el-button>
@@ -37,52 +39,66 @@
       <div class="add-button">
         <el-button
             v-show="check"
+            type="primary"
             @click="handleAdd()"
             round>新增
         </el-button>
       </div>
       <div class="list">
         <el-table
-            :data="userList"
             border
+            :data="userList"
             @cell-dblclick="cellDlClick"
             style="width: 100%">
           <el-table-column
+              label="序号"
+              type="index"
+              align="center"
+              width="230"
+          >
+          </el-table-column>
+          <el-table-column
               prop="unit"
               label="单位"
-              width="270">
+              align="center"
+              width="230">
           </el-table-column>
           <el-table-column
               prop="realName"
               label="用户姓名"
-              width="270">
+              align="center"
+              width="230">
           </el-table-column>
           <el-table-column
               prop="gender"
               label="性别"
-              width="270">
+              align="center"
+              width="230">
           </el-table-column>
           <el-table-column
               prop="age"
               label="年龄"
-              width="270">
+              align="center"
+              width="230">
           </el-table-column>
           <el-table-column
               prop="role"
               label="角色"
-              width="270">
+              align="center"
+              width="230">
           </el-table-column>
 
 <!--          <el-table-column-->
 <!--              prop="onlineType"-->
 <!--              label="在线状态"-->
-<!--              width="270">-->
+<!--              width="230">-->
 <!--          </el-table-column>-->
 
           <el-table-column
               prop="onlineType"
               label="在线状态"
-              width="270"
+              align="center"
+              width="230"
               filter-placement="bottom-end">
             <template slot-scope="scope">
               <el-tag
@@ -91,7 +107,11 @@
             </template>
           </el-table-column>
 
-          <el-table-column v-if="check" label="操作">
+          <el-table-column
+              align="center"
+              v-if="check"
+              label="操作"
+          >
             <template slot-scope="scope">
               <el-button
                   size="mini"
@@ -255,9 +275,6 @@ export default {
     window.removeEventListener('unload', e => this.loginOut())
   },
   methods: {
-    beforeunloadHandler() {
-      this.beforeUnload_time = new Date().getTime();
-    },
     cellDlClick(row){
       detail(row.id)
           .then((res) => {
@@ -425,12 +442,37 @@ html, body {
 }
 
 .box-top {
-  width: 100%;
-  height: 50px;
+  height: 60px;
+  overflow: auto;
   background: #8e8ebd;
 }
+.left-span {
+  margin: 15px;
+  float: left;
+}
 
-.box-top span {
+.right-span {
+  margin: 15px;
+  float: right;
+}
 
+.right-button {
+  margin-top: 10px;
+  float: right;
+}
+.select{
+  display: flex;
+  align-items: center;
+  overflow: auto;
+  height: 100px;
+}
+.demo-input-suffix{
+
+  display: flex;
+  align-items: center;
+}
+.add-button{
+  display: flex;
+  margin: 50px 0 10px 5px;
 }
 </style>
