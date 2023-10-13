@@ -164,6 +164,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, SysUserDTO>
                 .orElse(Collections.emptyList())
                 .stream()
                 .map(SysUserDTO::getUnit)
+                .distinct()
                 .filter(StringUtils::isNotBlank)
                 .collect(Collectors.toList());
 
