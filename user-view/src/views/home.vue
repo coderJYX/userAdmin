@@ -507,7 +507,7 @@ body {
 .select {
   display: flex;
   position: relative;
-  padding: 10px 0;
+  padding: 15px 0;
   /* align-items: center;
   overflow: auto; */
   /* height: 100px; */
